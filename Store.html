@@ -1,0 +1,85 @@
+<body style="background-color: grey;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iq_d8VSM0nw?autoplay=1&muted=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>>
+<br/> <br/> <br/>
+<p>
+Hello and welcome to the store. While you're here, I hope you'll enjoy our fine assortment of quality music. Here you will have $300 to spend. Spend any less, and you have money left over. Keep in mind one thing about this store: some items can not be bought.
+</p>
+<b>You have this much money left: $
+<span id="money">
+300
+</span>
+</b>
+<form onsubmit="return buying()">
+	<label for="buyItem"> Please specify the item you want to buy: </label> <br/>
+	<input type="text" id="buyItem" name="buyItem"><br/>
+</form>
+<div id="1">
+
+
+</div>
+
+
+<script>
+var money=300;
+var aisles=[];
+var aisle1={"Signed basketball Louis Vatton": 2000, "Backpack": 20, "Backpack (Red)" : 19};
+var aisle2={"xbox Series X": 900, "Wrestling mat": 70, "Ice Cream (Melted)": -7};
+var aisle3={"Garbage can (FULL)": undefined, "Banana (Peel)": NaN, "Banana (Interior)": 2000000};
+var aisle4={"Array":[], 5:Math.PI, "Aisle 3": aisle2, "Carter (Employee)": "\":)\""};
+aisles=[aisle1, aisle2, aisle3, aisle4];
+console.log(aisles);
+var divElement=document.getElementById("1");
+divElement.innerHTML=aisles;
+var aisleString="";
+for(let i=0; i<aisles.length; i++){
+		for(let k of Object.keys(aisles[i])){
+		if(typeof(aisles[i][k])=="object"){
+			aisleString+=k+": [";
+			for(let innerK of Object.keys(aisles[i][k])){
+			aisleString+=innerK+": " + aisles[i][k][innerK].toString()+ ", ";
+			}
+			aisleString+="] <br/>";
+		}
+		else if(aisles[i][k]!=null){
+			aisleString+=k+":" + aisles[i][k].toString() + "<br/>";
+		}
+		
+		else{
+			aisleString+=k+":" + aisles[i][k] + "<br/>";
+		
+			}
+		}
+		aisleString+="<br/>"
+	}
+	divElement.innerHTML=aisleString;
+	
+
+function buying(){
+	var itemBought = document.getElementById("buyItem").value;
+	for(let i=0; i<aisles.length; i++){
+		for(let k of Object.keys(aisles[i])){
+		if((k.toLowerCase())==itemBought.toLowerCase()){
+			var price = aisles[i][k];
+			if(typeof (price)=="number"){
+			if(price<=money){
+				money-=price;
+				alert("WHOA YOU BOUGHT A: " + itemBought);
+				}
+				else {
+					alert("No, sorry, you don't have enough for a: " + itemBought);
+					}
+				}
+				else{
+					alert("Sorry buddy, " + itemBought + " has a garbage price!");
+					}
+			}	
+		}
+	}
+document.getElementById("money").innerHTML=money;
+return false;
+}
+
+
+
+</script>
+</body>
